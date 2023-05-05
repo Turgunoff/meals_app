@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
 import '../models/category_model.dart';
+import '../models/meal.dart';
 import '../widgets/category_item.dart';
 
 class CategoriesScreen extends StatelessWidget {
   final List<Category> categories;
-  const CategoriesScreen({required this.categories, super.key});
+  final List<Meal> meals;
+  const CategoriesScreen(
+      {required this.categories, required this.meals, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +25,11 @@ class CategoriesScreen extends StatelessWidget {
           crossAxisSpacing: 20,
           mainAxisSpacing: 20,
         ),
-        children: categories
-            .map(
-              (category) => CategoryItem(category: category),
-            )
-            .toList(),
+        children: categories.map((category) {
+          final categoryMeals =
+              meals.where((meal) => meal.categoryId == category.id).toList();
+          return CategoryItem(category: category, meals: categoryMeals);
+        }).toList(),
       ),
     );
   }

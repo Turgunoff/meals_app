@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:meals_app/models/category_model.dart';
+import 'package:meals_app/screens/category_meals_screen.dart';
+
+import '../models/meal.dart';
 
 class CategoryItem extends StatelessWidget {
   final Category category;
+  final List<Meal> meals;
   const CategoryItem({
     super.key,
     required this.category,
+    required this.meals,
   });
 
   void _goToCategoryMealsScreen(BuildContext context) {
@@ -13,10 +18,10 @@ class CategoryItem extends StatelessWidget {
     //   MaterialPageRoute(
     //       builder: (ctx) => CategoryMealsScreen(categoryName: category.title)),
     // );
-    Navigator.of(context).pushNamed(
-      '/category-meals',
-      arguments: category.title,
-    );
+    Navigator.of(context).pushNamed(CategoryMealsScreen.routeName, arguments: {
+      'categoryTitle': category.title,
+      'categoryMeals': meals,
+    });
   }
 
   @override

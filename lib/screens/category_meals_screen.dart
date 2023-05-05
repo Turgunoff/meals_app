@@ -1,18 +1,33 @@
 import 'package:flutter/material.dart';
 
+import '../models/meal.dart';
+import '../widgets/meal_item.dart';
+
 class CategoryMealsScreen extends StatelessWidget {
+  static const routeName = '/category-meals';
+
   const CategoryMealsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final categoryTitle = ModalRoute.of(context)!.settings.arguments as String;
+    final categoryData =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final title = categoryData['categoryTitle'];
+    final meals = categoryData['categoryMeals'] as List<Meal>;
     return Scaffold(
       appBar: AppBar(
-        title: Text(categoryTitle),
+        centerTitle: true,
+        title: Text(title),
       ),
-      body: const Center(
-        child: Text("Not Found!"),
-      ),
+      body: meals.isNotEmpty
+          ? ListView.builder(
+              padding: const EdgeInsets.all(10),
+              itemBuilder: (ctx, index) => MealItem(meal: meals[index]),
+              itemCount: meals.length,
+            )
+          : const Center(
+              child: Text('Hozirda maxsulot mavjud emas'),
+            ),
     );
   }
 }
