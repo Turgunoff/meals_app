@@ -6,7 +6,6 @@ class Meal {
   final String categoryId;
   final int preparingTime;
   final double price;
-  bool isLike;
   final List<String> ingredients;
 
   Meal({
@@ -17,7 +16,6 @@ class Meal {
     required this.categoryId,
     required this.preparingTime,
     required this.price,
-    this.isLike = false,
     required this.ingredients,
   });
 }
@@ -88,7 +86,22 @@ class Meals {
       ],
     ),
   ];
+  List<Meal> _favorites = [];
+
   List<Meal> get list {
     return _list;
+  }
+
+  List<Meal> get favorites {
+    return _favorites;
+  }
+
+  void toggleLike(String mealId) {
+    final mealIndex = _favorites.indexWhere((element) => element.id == mealId);
+    if (mealIndex < 0) {
+      _favorites.add(list.firstWhere((element) => element.id == mealId));
+    } else {
+      _favorites.removeWhere((element) => element.id == mealId);
+    }
   }
 }
