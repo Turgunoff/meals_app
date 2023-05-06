@@ -1,7 +1,7 @@
 class Meal {
   final String id;
   final String title;
-  final String imgUrl;
+  final List<String> imgUrls;
   final String description;
   final String categoryId;
   final int preparingTime;
@@ -12,7 +12,7 @@ class Meal {
   Meal({
     required this.id,
     required this.title,
-    required this.imgUrl,
+    required this.imgUrls,
     required this.description,
     required this.categoryId,
     required this.preparingTime,
@@ -27,7 +27,11 @@ class Meals {
     Meal(
       id: "id1",
       title: 'Lavash',
-      imgUrl: 'assets/images/fast_food.jpg',
+      imgUrls: [
+        'assets/images/fast_food.jpg',
+        'assets/images/lavash.jpg',
+        'assets/images/twister.jpg',
+      ],
       description: 'Ajoyib',
       categoryId: 'id1',
       preparingTime: 10,
@@ -39,7 +43,11 @@ class Meals {
     Meal(
       id: "id2",
       title: 'Lavash',
-      imgUrl: 'assets/images/fast_food.jpg',
+      imgUrls: [
+        'assets/images/fast_food.jpg',
+        'assets/images/lavash.jpg',
+        'assets/images/twister.jpg',
+      ],
       description: 'Ajoyib',
       categoryId: 'id1',
       preparingTime: 10,
@@ -51,7 +59,11 @@ class Meals {
     Meal(
       id: "id2",
       title: 'Gamburger',
-      imgUrl: 'assets/images/fast_food.jpg',
+      imgUrls: [
+        'assets/images/fast_food.jpg',
+        'assets/images/lavash.jpg',
+        'assets/images/twister.jpg',
+      ],
       description: 'Ajoyib 2',
       categoryId: 'id2',
       preparingTime: 15,

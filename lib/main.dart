@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:meals_app/screens/meal_details_screen.dart';
+import 'package:meals_app/screens/tabs_screen.dart';
 
 import 'models/category_model.dart';
 import 'models/meal.dart';
-import 'screens/categories_screen.dart';
 import 'screens/category_meals_screen.dart';
 
 void main() {
@@ -23,9 +23,12 @@ class MyApp extends StatelessWidget {
         fontFamily: GoogleFonts.montserrat().fontFamily,
       ),
       debugShowCheckedModeBanner: false,
-      home: CategoriesScreen(
-          categories: _categoryModel.list, meals: _mealModel.list),
+      initialRoute: '/',
       routes: {
+        '/': (ctx) => TabsScreen(
+              categories: _categoryModel.list,
+              meals: _mealModel.list,
+            ),
         CategoryMealsScreen.routeName: (ctx) => const CategoryMealsScreen(),
         MealDetailsScreen.routeName: (ctx) => const MealDetailsScreen(),
       },

@@ -12,25 +12,24 @@ class CategoriesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text("Category"),
-      ),
-      body: GridView(
-        padding: const EdgeInsets.all(15.0),
-        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 200,
-          childAspectRatio: 3 / 2,
-          crossAxisSpacing: 20,
-          mainAxisSpacing: 20,
-        ),
-        children: categories.map((category) {
-          final categoryMeals =
-              meals.where((meal) => meal.categoryId == category.id).toList();
-          return CategoryItem(category: category, meals: categoryMeals);
-        }).toList(),
-      ),
-    );
+    return categories.isNotEmpty
+        ? GridView(
+            padding: const EdgeInsets.all(15.0),
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 200,
+              childAspectRatio: 3 / 2,
+              crossAxisSpacing: 20,
+              mainAxisSpacing: 20,
+            ),
+            children: categories.map((category) {
+              final categoryMeals = meals
+                  .where((meal) => meal.categoryId == category.id)
+                  .toList();
+              return CategoryItem(category: category, meals: categoryMeals);
+            }).toList(),
+          )
+        : const Center(
+            child: Text("No data"),
+          );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 import '../models/meal.dart';
@@ -12,6 +13,8 @@ class MealDetailsScreen extends StatefulWidget {
 }
 
 class _MealDetailsScreenState extends State<MealDetailsScreen> {
+  int activeImageIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     final meal = ModalRoute.of(context)!.settings.arguments as Meal;
@@ -23,11 +26,42 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Image.asset(
-              meal.imgUrl,
-              width: double.infinity,
-              height: 250,
-              fit: BoxFit.cover,
+            CarouselSlider(
+              options: CarouselOptions(
+                height: 250.0,
+                viewportFraction: 1,
+                autoPlay: true,
+                initialPage: activeImageIndex,
+                onPageChanged: (index, reason) {
+                  setState(() {
+                    activeImageIndex = index;
+                  });
+                },
+              ),
+              items: meal.imgUrls.map((image) {
+                return SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: Image.asset(image, fit: BoxFit.cover),
+                );
+              }).toList(),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: meal.imgUrls.map((image) {
+                final imageIndex = meal.imgUrls.indexOf(image);
+                return Container(
+                  margin: const EdgeInsets.symmetric(
+                      vertical: 10.0, horizontal: 5.0),
+                  width: 8,
+                  height: 8,
+                  decoration: BoxDecoration(
+                    color: activeImageIndex == imageIndex
+                        ? Colors.blue
+                        : Colors.grey,
+                    shape: BoxShape.circle,
+                  ),
+                );
+              }).toList(),
             ),
             const SizedBox(
               height: 10,

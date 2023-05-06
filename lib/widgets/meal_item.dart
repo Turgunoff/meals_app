@@ -27,7 +27,7 @@ class MealItem extends StatelessWidget {
                   SizedBox(
                       width: double.infinity,
                       height: 300,
-                      child: Image.asset(meal.imgUrl, fit: BoxFit.cover)),
+                      child: Image.asset(meal.imgUrls[0], fit: BoxFit.cover)),
                   Positioned(
                     bottom: 0,
                     right: 0,
