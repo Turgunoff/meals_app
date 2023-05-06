@@ -5,8 +5,9 @@ import '../widgets/meal_item.dart';
 
 class CategoryMealsScreen extends StatelessWidget {
   static const routeName = '/category-meals';
+  final Function toggleLike;
 
-  const CategoryMealsScreen({super.key});
+  const CategoryMealsScreen({required this.toggleLike, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,10 @@ class CategoryMealsScreen extends StatelessWidget {
       body: meals.isNotEmpty
           ? ListView.builder(
               padding: const EdgeInsets.all(10),
-              itemBuilder: (ctx, index) => MealItem(meal: meals[index]),
+              itemBuilder: (ctx, index) => MealItem(
+                meal: meals[index],
+                toggleLike: toggleLike,
+              ),
               itemCount: meals.length,
             )
           : const Center(

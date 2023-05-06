@@ -8,13 +8,26 @@ import 'models/meal.dart';
 import 'screens/category_meals_screen.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  MyApp({super.key});
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   final _categoryModel = Categories();
+
   final _mealModel = Meals();
+
+  void _toggleLike(String mealId) {
+    setState(() {
+      _mealModel.toggleLike(mealId);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +42,8 @@ class MyApp extends StatelessWidget {
               categories: _categoryModel.list,
               meals: _mealModel.list,
             ),
-        CategoryMealsScreen.routeName: (ctx) => const CategoryMealsScreen(),
+        CategoryMealsScreen.routeName: (ctx) =>
+            CategoryMealsScreen(toggleLike: _toggleLike),
         MealDetailsScreen.routeName: (ctx) => const MealDetailsScreen(),
       },
     );

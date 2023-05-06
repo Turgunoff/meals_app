@@ -5,8 +5,13 @@ import '../models/meal.dart';
 
 class MealItem extends StatelessWidget {
   final Meal meal;
+  final Function toggleLike;
 
-  const MealItem({super.key, required this.meal});
+  const MealItem({
+    super.key,
+    required this.meal,
+    required this.toggleLike,
+  });
 
   void _goToMealDetails(BuildContext context) {
     Navigator.of(context)
@@ -54,7 +59,7 @@ class MealItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () => toggleLike(meal.id),
                       icon: Icon(
                         meal.isLike ? Icons.favorite : Icons.favorite_outline,
                         color: Colors.black54,
